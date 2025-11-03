@@ -7,7 +7,10 @@ import os
 from typing import List
 
 # OpenAI 클라이언트 초기화
-client = openai.OpenAI(api_key="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")
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+client = openai.OpenAI(api_key=api_key)
 
 # 페르소나 설정
 PERSONA = """
