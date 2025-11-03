@@ -1,0 +1,16 @@
+<svg width="40" height="50" viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- 점프 상태 -->
+  <rect x="0" y="0" width="40" height="50" fill="#000"/>
+  <rect x="8" y="20" width="24" height="15" fill="#535353"/>
+  <rect x="12" y="10" width="16" height="10" fill="#535353"/>
+  <rect x="14" y="5" width="12" height="5" fill="#535353"/>
+  <rect x="24" y="18" width="4" height="6" fill="#535353"/>
+  <rect x="20" y="20" width="2" height="2" fill="#000"/>
+  <rect x="26" y="23" width="3" height="1" fill="#000"/>
+  <rect x="12" y="35" width="4" height="6" fill="#535353"/>
+  <rect x="24" y="35" width="4" height="6" fill="#535353"/>
+  <rect x="12" y="40" width="4" height="1" fill="#000"/>
+  <rect x="24" y="40" width="4" height="1" fill="#000"/>
+  <rect x="-8" y="20" width="8" height="6" fill="#535353"/>
+  <rect x="-12" y="22" width="4" height="2" fill="#535353"/>
+</svg>

@@ -1,0 +1,116 @@
+.dinoGameApp {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', monospace;
+}
+
+.gameHeader {
+  padding: 10px 20px;
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #ccc;
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.gameArea {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+}
+
+.gameCanvas {
+  border: 2px solid #333;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gameOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.startScreen,
+.gameOverScreen {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 3px solid #333;
+}
+
+.startScreen h2,
+.gameOverScreen h2 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.startScreen p,
+.gameOverScreen p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.startButton,
+.restartButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.startButton:hover,
+.restartButton:hover {
+  background-color: #45a049;
+}
+
+.startButton:active,
+.restartButton:active {
+  background-color: #3d8b40;
+}
+
+.gameInstructions {
+  padding: 10px 20px;
+  background-color: #e0e0e0;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.gameInstructions p {
+  margin: 0;
+}

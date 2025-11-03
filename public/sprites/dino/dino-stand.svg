@@ -1,0 +1,15 @@
+<svg width="40" height="50" viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- 공룡 서 있는 상태 (기본) -->
+  <rect x="2" y="38" width="36" height="12" fill="#535353"/>
+  <rect x="6" y="26" width="20" height="12" fill="#535353"/>
+  <rect x="8" y="22" width="16" height="4" fill="#535353"/>
+  <rect x="24" y="30" width="4" height="8" fill="#535353"/>
+  <rect x="20" y="32" width="2" height="2" fill="#000"/>
+  <rect x="26" y="35" width="4" height="2" fill="#000"/>
+  <rect x="6" y="50" width="4" height="10" fill="#535353"/>
+  <rect x="18" y="50" width="4" height="10" fill="#535353"/>
+  <rect x="6" y="55" width="4" height="1" fill="#000"/>
+  <rect x="18" y="55" width="4" height="1" fill="#000"/>
+  <rect x="-12" y="38" width="12" height="6" fill="#535353"/>
+  <rect x="-18" y="40" width="6" height="2" fill="#535353"/>
+</svg>

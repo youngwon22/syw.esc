@@ -1,0 +1,19 @@
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 24px);
+  background-image: url('../../배경샘플22.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.desktopIcons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}

@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 공룡 몸체 -->
+  <rect x="20" y="25" width="24" height="20" fill="#535353" rx="2"/>
+  
+  <!-- 공룡 머리 -->
+  <rect x="15" y="20" width="20" height="15" fill="#535353" rx="3"/>
+  
+  <!-- 공룡 눈 -->
+  <circle cx="25" cy="27" r="2" fill="#000"/>
+  
+  <!-- 공룡 다리 -->
+  <rect x="22" y="45" width="6" height="12" fill="#535353"/>
+  <rect x="36" y="45" width="6" height="12" fill="#535353"/>
+  
+  <!-- 공룡 꼬리 -->
+  <rect x="44" y="30" width="8" height="6" fill="#535353" rx="1"/>
+  
+  <!-- 선인장 (장애물) -->
+  <rect x="50" y="15" width="8" height="20" fill="#535353" rx="1"/>
+  <rect x="48" y="20" width="4" height="8" fill="#535353" rx="1"/>
+  <rect x="56" y="20" width="4" height="8" fill="#535353" rx="1"/>
+</svg>
+
+

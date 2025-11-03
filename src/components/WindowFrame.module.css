@@ -1,0 +1,168 @@
+.windowFrame {
+  position: absolute;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.titleBar {
+  height: 28px;
+  background-color: #c0c0c0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+  border-bottom: 1px solid #999;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  cursor: move;
+  user-select: none;
+}
+
+.trafficLights {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.trafficLight {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.8),
+    inset 0 -1px 2px rgba(0,0,0,0.2),
+    0 2px 6px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.1);
+  transition: all 0.15s ease;
+  backdrop-filter: blur(2px);
+}
+
+.trafficLight:hover {
+  transform: scale(1.15);
+  box-shadow: 
+    inset 0 2px 6px rgba(255,255,255,0.9),
+    inset 0 -1px 3px rgba(0,0,0,0.3),
+    0 3px 8px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.2);
+  backdrop-filter: blur(3px);
+}
+
+.close {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(139,0,0,0.8)),
+    linear-gradient(135deg, rgba(255,255,255,0.3), rgba(139,0,0,0.6));
+}
+
+.minimize {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(184,134,11,0.8)),
+    linear-gradient(135deg, rgba(255,255,255,0.3), rgba(184,134,11,0.6));
+}
+
+.maximize {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(0,100,0,0.8)),
+    linear-gradient(135deg, rgba(255,255,255,0.3), rgba(0,100,0,0.6));
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+.content {
+  height: calc(100% - 28px);
+  background: white;
+  overflow: auto;
+}
+
+.resizeBorderTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+}
+
+.resizeBorderRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  background: transparent;
+}
+
+.resizeBorderBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+}
+
+.resizeBorderLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  background: transparent;
+}
+
+.resizeBorderTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+  background: transparent;
+}
+
+.resizeBorderTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: ne-resize;
+  background: transparent;
+}
+
+.resizeBorderBottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: sw-resize;
+  background: transparent;
+}
+
+.resizeBorderBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+  background: transparent;
+}

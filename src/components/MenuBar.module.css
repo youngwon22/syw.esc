@@ -1,0 +1,192 @@
+/* Geneva-12 폰트 로드 */
+@font-face {
+  font-family: 'Geneva-12';
+  src: url('/font/geneva-12.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Chicago 폰트 로드 */
+@font-face {
+  font-family: 'Chicago';
+  src: url('/font/ChicagoKare-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.menuBar {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  background-color: #c0c0c0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+  border-bottom: 2px solid #888;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+  padding: 0 8px;
+  gap: 16px;
+  font-size: 13px;
+  font-family: 'Geneva-12', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.menuItem {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.menuItem:hover {
+  background: none;
+  color: inherit;
+}
+
+.menuItem:active {
+  color: white;
+  transition: color 0.1s ease;
+}
+
+.menuItem strong {
+  font-weight: 700;
+  color: #333;
+}
+
+.noLeftMargin {
+  margin-left: -10px;
+  margin-right: 2px;
+}
+
+.appleMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.youngwonMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fileMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.editMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.viewMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.helpMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.timeDisplay {
+  margin-left: auto;
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+  padding: 2px 8px;
+}
+
+.appleLogo {
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  margin-top: -2px;
+}
+
+.appleLogo:hover {
+  background: none;
+}
+
+.appleLogo img {
+  filter: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background-color: #c0c0c0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+  border: 1px solid #888;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.dropdownTitle {
+  background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+  border-bottom: 1px solid #888;
+  padding: 8px 12px;
+  margin: -6px -6px 6px -6px;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  border-radius: 0px 0px 0 0;
+  cursor: default;
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: 'Geneva-12', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdownItem:hover {
+  background: linear-gradient(to bottom, #4a90e2, #357abd);
+  color: white;
+}
+
+.dropdownItem strong {
+  font-weight: 700;
+  color: #333;
+}
+
+.noHover {
+  cursor: default !important;
+}
+
+.noHover:hover {
+  background: none !important;
+  color: #333 !important;
+}
+
+.separator {
+  height: 1px;
+  background: #9a9a9a;
+  margin: 4px 0;
+}
+
+.appIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.appDropdownItem {
+  display: flex;
+  align-items: center;
+}
+
+/* Youngwon 드롭다운 매뉴는 기존 폰트 유지 */
+.youngwonMenu .dropdownItem {
+  font-family: 'Libre Bodoni', serif !important;
+}
