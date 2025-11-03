@@ -46,8 +46,8 @@ export const useChats = () => {
     setIsLoading(true);
 
     try {
-      // Vercel 배포 환경에서는 /api/chat 사용, 로컬에서는 환경 변수 또는 localhost 사용
-      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:8000');
+      // 환경 변수에서 API URL 가져오기 (없으면 로컬 개발 환경 기본값)
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
       const response = await fetch(`${apiUrl}/chat`, {
         method: 'POST',
         headers: {
