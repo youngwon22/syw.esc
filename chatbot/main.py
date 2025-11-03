@@ -5,6 +5,10 @@ import uvicorn
 import openai
 import os
 from typing import List
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 # OpenAI 클라이언트 초기화
 api_key = os.getenv("OPENAI_API_KEY")
