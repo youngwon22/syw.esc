@@ -74,9 +74,17 @@ app = FastAPI(
 )
 
 # CORS 설정 (프론트엔드와 통신을 위해)
+# 환경 변수에서 허용된 origin 목록 가져오기
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if allowed_origins_env:
+    allowed_origins = [origin.strip() for origin in allowed_origins_env.split(",")]
+else:
+    # 기본값: 로컬 개발 환경
+    allowed_origins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"],  # Vite 개발 서버 포트들
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

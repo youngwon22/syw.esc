@@ -76,10 +76,18 @@ export const useChats = () => {
       }
     } catch (error) {
       console.error('메시지 전송 오류:', error);
+      let errorContent = '연결에 문제가 생겼어 😅 잠시 후 다시 시도해줘!';
+      
+      // 네트워크 오류인 경우 더 명확한 메시지
+      if (error.message.includes('Failed to fetch') || error.name === 'TypeError') {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        errorContent = `백엔드 서버에 연결할 수 없어요 😅\nAPI URL: ${apiUrl}\n\n백엔드 서버가 실행 중인지 확인해주세요!`;
+      }
+      
       const errorMessage = {
         id: Date.now() + 1,
         sender: 'youngwon',
-        content: '연결에 문제가 생겼어 😅 잠시 후 다시 시도해줘!',
+        content: errorContent,
         timestamp: getTimestamp()
       };
       setMessages(prev => [...prev, errorMessage]);
