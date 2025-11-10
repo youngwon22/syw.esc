@@ -89,6 +89,23 @@
   white-space: pre-wrap;
 }
 
+/* 타이핑 커서 */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  color: #333;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 /* 메시지 정보 (발신자, 시간) */
 .messageInfo {
   display: flex;

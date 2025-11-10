@@ -7,6 +7,8 @@ function ChatsApp() {
     messages,
     inputMessage,
     isLoading,
+    isTyping,
+    typingMessage,
     messagesEndRef,
     setInputMessage,
     sendMessage,
@@ -47,7 +49,23 @@ function ChatsApp() {
               </div>
             </div>
           ))}
-          {isLoading && (
+          {/* 타이핑 중인 메시지 표시 */}
+          {isTyping && typingMessage.content && (
+            <div className={`${styles.messageWrapper} ${styles.botMessage}`}>
+              <div className={styles.messageBubble}>
+                <div className={styles.messageContent}>
+                  {typingMessage.content}
+                  <span className={styles.cursor}>|</span>
+                </div>
+                <div className={styles.messageInfo}>
+                  <span className={styles.senderName}>youngwon</span>
+                  <span className={styles.timestamp}>{typingMessage.timestamp}</span>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* 로딩 중일 때만 타이핑 인디케이터 표시 (응답 대기 중) */}
+          {isLoading && !isTyping && (
             <div className={`${styles.messageWrapper} ${styles.botMessage}`}>
               <div className={styles.messageBubble}>
                 <div className={styles.typingIndicator}>
