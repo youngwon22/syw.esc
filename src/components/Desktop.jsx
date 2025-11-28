@@ -8,6 +8,7 @@ import AlbumApp from '../apps/AlbumApp';
 import ChatsApp from '../apps/ChatsApp';
 import PhotoBoothApp from '../apps/PhotoBoothApp';
 import DinoGameApp from '../apps/DinoGameApp';
+import InternetApp from '../apps/InternetApp';
 import { useSound } from '../hooks/useSound';
 import styles from './Desktop.module.css';
 
@@ -64,11 +65,11 @@ function Desktop() {
     const newWindow = {
       id: Date.now().toString(),
       appType,
-      title: appType === 'Notepad' ? 'TextEdit' : appType === 'Music' ? 'Music' : appType === 'Album' ? 'Album' : appType === 'Chats' ? 'Chats' : appType === 'PhotoBooth' ? 'Photo Booth' : appType === 'DinoGame' ? 'Dino Game' : 'Macintosh HD',
+      title: appType === 'Notepad' ? 'TextEdit' : appType === 'Music' ? 'Music' : appType === 'Album' ? 'Album' : appType === 'Chats' ? 'Chats' : appType === 'PhotoBooth' ? 'Photo Booth' : appType === 'DinoGame' ? 'Dino Game' : appType === 'Internet' ? 'Internet' : 'Macintosh HD',
       x: 100 + (windows.length * 30),
       y: 100 + (windows.length * 30),
-      width: appType === 'Notepad' ? 500 : appType === 'Music' ? 400 : appType === 'Album' ? 800 : appType === 'Chats' ? 600 : appType === 'PhotoBooth' ? 600 : appType === 'DinoGame' ? 800 : 600,
-      height: appType === 'Notepad' ? 360 : appType === 'Music' ? 700 : appType === 'Album' ? 600 : appType === 'Chats' ? 500 : appType === 'PhotoBooth' ? 500 : appType === 'DinoGame' ? 400 : 400,
+      width: appType === 'Notepad' ? 500 : appType === 'Music' ? 400 : appType === 'Album' ? 800 : appType === 'Chats' ? 600 : appType === 'PhotoBooth' ? 600 : appType === 'DinoGame' ? 800 : appType === 'Internet' ? 900 : 600,
+      height: appType === 'Notepad' ? 360 : appType === 'Music' ? 700 : appType === 'Album' ? 600 : appType === 'Chats' ? 500 : appType === 'PhotoBooth' ? 500 : appType === 'DinoGame' ? 400 : appType === 'Internet' ? 700 : 400,
       zIndex: nextZIndex
     };
     
@@ -107,8 +108,8 @@ function Desktop() {
           setMaximizedWindow(null);
           return {
             ...window,
-            width: window.appType === 'Notepad' ? 500 : window.appType === 'Music' ? 400 : window.appType === 'PhotoBooth' ? 600 : window.appType === 'DinoGame' ? 800 : 600,
-            height: window.appType === 'Notepad' ? 360 : window.appType === 'Music' ? 700 : window.appType === 'PhotoBooth' ? 500 : window.appType === 'DinoGame' ? 400 : 400,
+            width: window.appType === 'Notepad' ? 500 : window.appType === 'Music' ? 400 : window.appType === 'PhotoBooth' ? 600 : window.appType === 'DinoGame' ? 800 : window.appType === 'Internet' ? 900 : 600,
+            height: window.appType === 'Notepad' ? 360 : window.appType === 'Music' ? 700 : window.appType === 'PhotoBooth' ? 500 : window.appType === 'DinoGame' ? 400 : window.appType === 'Internet' ? 700 : 400,
             x: 100,
             y: 100
           };
@@ -172,6 +173,8 @@ function Desktop() {
         return <PhotoBoothApp />;
       case 'DinoGame':
         return <DinoGameApp />;
+      case 'Internet':
+        return <InternetApp />;
       default:
         return <div>Unknown App</div>;
     }
@@ -192,19 +195,19 @@ function Desktop() {
           onDoubleClick={() => openApp('Chats')}
         />
         <AppIcon
-          iconSrc="/icon/포토부스.png"
-          appName="Photo Booth"
-          onDoubleClick={() => openApp('PhotoBooth')}
-        />
-        <AppIcon
-          iconSrc="/icon/공룡게임.svg"
-          appName="Dino Game"
-          onDoubleClick={() => openApp('DinoGame')}
+          iconSrc="/icon/internet.png"
+          appName="Internet"
+          onDoubleClick={() => openApp('Internet')}
         />
         <AppIcon
           iconSrc="/icon/음악 앱.png"
           appName="Music"
           onDoubleClick={() => openApp('Music')}
+        />
+        <AppIcon
+          iconSrc="/icon/포토부스.png"
+          appName="Photo Booth"
+          onDoubleClick={() => openApp('PhotoBooth')}
         />
         <AppIcon
           iconSrc="/icon/앨범 앱.png"
@@ -215,6 +218,11 @@ function Desktop() {
           iconSrc="/icon/text.png"
           appName="TextEdit"
           onDoubleClick={() => openApp('Notepad')}
+        />
+        <AppIcon
+          iconSrc="/icon/공룡게임.svg"
+          appName="Dino Game"
+          onDoubleClick={() => openApp('DinoGame')}
         />
       </div>
 

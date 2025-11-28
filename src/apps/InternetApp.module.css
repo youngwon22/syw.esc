@@ -1,0 +1,448 @@
+.internet {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* 툴바 (주소창 + 바로가기) */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  gap: 8px;
+  flex-shrink: 0;
+  background: #e8e8e8;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.3) 2px,
+    rgba(255, 255, 255, 0.3) 4px
+  );
+  border-bottom: 1px solid #ccc;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navigationButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.navButton {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f6368;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.navButton svg {
+  display: block;
+}
+
+.navButton:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.06);
+  color: #000;
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.urlForm {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+}
+
+.urlInput {
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.urlInput:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.urlInput::placeholder {
+  color: #999;
+}
+
+/* 바로가기 링크 */
+.quickLinks {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.quickLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.quickLink:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.quickLink svg {
+  flex-shrink: 0;
+}
+
+.quickLink span {
+  font-weight: 500;
+}
+
+/* GNB (Global Navigation Bar) */
+.gnb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.gnbLeft {
+  display: flex;
+  align-items: center;
+}
+
+.gnbLogo {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
+.gnbCenter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.gnbMenu {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.gnbMenu:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+/* 메인 컨텐츠 영역 */
+.content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #ffffff;
+}
+
+/* youngwon.com 전용 페이지 */
+.youngwonPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 0;
+}
+
+.mainScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px 20px;
+}
+
+/* 숲속 이미지 컨테이너 */
+.forestImageContainer {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 60px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.forestImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+/* Carousel 스타일 */
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  padding: 0 7.5%;
+  touch-action: pan-y;
+}
+
+.carouselWrapper:active {
+  cursor: grabbing;
+}
+
+.carouselTrack {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+  gap: 20px;
+  align-items: center;
+}
+
+.carouselSlide {
+  width: 85%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-sizing: border-box;
+}
+
+.carouselSlide:not(.active) {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+.carouselSlide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.videoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.carouselSlide:not(.active) .videoWrapper {
+  width: 100%;
+}
+
+.carouselIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.indicator.active {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.youtubeVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.videoPlaceholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.placeholderContent {
+  color: #fff;
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.playIcon {
+  display: block;
+}
+
+.videoTitle {
+  width: 100%;
+  text-align: left;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  padding: 0 10px;
+}
+
+/* 로고 */
+.logo {
+  margin-bottom: 40px;
+}
+
+.logoText {
+  font-size: 72px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -2px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: color 0.3s ease;
+}
+
+/* 검색창 */
+.searchContainer {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.searchBox {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchBox:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.searchBox:focus {
+  border-color: #4285f4;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+}
+
+.searchBox::placeholder {
+  color: #9aa0a6;
+}
+
+/* 원형 버튼들 */
+.projectButtons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.projectButton {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.projectButton:hover {
+  background: #eeeeee;
+  border-color: #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.projectButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}

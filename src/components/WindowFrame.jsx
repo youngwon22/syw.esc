@@ -11,32 +11,36 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
   const isDraggingRef = useRef(false);
   const resizeResizingSoundRef = useRef(null);
   const resizeStopSoundRef = useRef(null);
+  const hasPlayedResizingSoundRef = useRef(false);
+  const hasPlayedResizeStopSoundRef = useRef(false);
+
+  const hasPlayedMovingSoundRef = useRef(false);
 
   const handleStart = () => {
     onFocus();
     isDraggingRef.current = true;
+    hasPlayedMovingSoundRef.current = false;
     
-    // 드래그 시작 시 이동 중 소리 재생
+    // 드래그 시작 시 이동 중 소리 재생 (한 번만)
     if (!moveMovingSoundRef.current) {
       moveMovingSoundRef.current = new Audio('/sounds/ryos/WindowMoveMoving.mp3');
       moveMovingSoundRef.current.loop = true;
       moveMovingSoundRef.current.volume = 0.5;
     }
     
-    if (moveMovingSoundRef.current.paused) {
+    if (!hasPlayedMovingSoundRef.current && moveMovingSoundRef.current.paused) {
       moveMovingSoundRef.current.play().catch(err => console.log('Sound play error:', err));
+      hasPlayedMovingSoundRef.current = true;
     }
   };
 
   const handleDrag = (e, data) => {
     // 드래그 중에는 위치를 업데이트하지 않음 (성능상 이유)
     // 드래그가 끝날 때만 위치를 업데이트
-    
-    // 이동 중 소리가 멈춰있다면 재생
-    if (isDraggingRef.current && moveMovingSoundRef.current && moveMovingSoundRef.current.paused) {
-      moveMovingSoundRef.current.play().catch(err => console.log('Sound play error:', err));
-    }
+    // 사운드는 handleStart에서만 재생하므로 여기서는 아무것도 하지 않음
   };
+
+  const hasPlayedStopSoundRef = useRef(false);
 
   const handleStop = (e, data) => {
     // 드래그가 끝났을 때 위치 업데이트
@@ -48,16 +52,25 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
       moveMovingSoundRef.current.currentTime = 0;
     }
     
-    // 정지 소리 재생
+    // 정지 소리 재생 (한 번만)
     if (!moveStopSoundRef.current) {
       moveStopSoundRef.current = new Audio('/sounds/ryos/WindowMoveStop.mp3');
       moveStopSoundRef.current.volume = 0.5;
     }
     
-    moveStopSoundRef.current.currentTime = 0;
-    moveStopSoundRef.current.play().catch(err => console.log('Sound play error:', err));
+    if (!hasPlayedStopSoundRef.current) {
+      moveStopSoundRef.current.currentTime = 0;
+      moveStopSoundRef.current.play().catch(err => console.log('Sound play error:', err));
+      hasPlayedStopSoundRef.current = true;
+    }
     
     isDraggingRef.current = false;
+    
+    // 다음 드래그를 위해 플래그 리셋
+    setTimeout(() => {
+      hasPlayedMovingSoundRef.current = false;
+      hasPlayedStopSoundRef.current = false;
+    }, 100);
   };
 
   const handleMaximize = () => {
@@ -77,15 +90,19 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
       direction: direction
     });
     
-    // 리사이즈 시작 시 리사이징 소리 재생
+    hasPlayedResizingSoundRef.current = false;
+    hasPlayedResizeStopSoundRef.current = false;
+    
+    // 리사이즈 시작 시 리사이징 소리 재생 (한 번만)
     if (!resizeResizingSoundRef.current) {
       resizeResizingSoundRef.current = new Audio('/sounds/ryos/WindowResizeResizing.mp3');
       resizeResizingSoundRef.current.loop = true;
       resizeResizingSoundRef.current.volume = 0.5;
     }
     
-    if (resizeResizingSoundRef.current.paused) {
+    if (!hasPlayedResizingSoundRef.current && resizeResizingSoundRef.current.paused) {
       resizeResizingSoundRef.current.play().catch(err => console.log('Resize sound play error:', err));
+      hasPlayedResizingSoundRef.current = true;
     }
     
     e.preventDefault();
@@ -120,10 +137,7 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
     
     onResize(newWidth, newHeight, newX, newY);
     
-    // 리사이징 중 소리가 멈춰있다면 재생
-    if (resizeResizingSoundRef.current && resizeResizingSoundRef.current.paused) {
-      resizeResizingSoundRef.current.play().catch(err => console.log('Resize sound play error:', err));
-    }
+    // 사운드는 handleBorderMouseDown에서만 재생하므로 여기서는 아무것도 하지 않음
   };
 
   const handleMouseUp = () => {
@@ -135,14 +149,23 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
       resizeResizingSoundRef.current.currentTime = 0;
     }
     
-    // 리사이즈 정지 소리 재생
+    // 리사이즈 정지 소리 재생 (한 번만)
     if (!resizeStopSoundRef.current) {
       resizeStopSoundRef.current = new Audio('/sounds/ryos/WindowResizeStop.mp3');
       resizeStopSoundRef.current.volume = 0.5;
     }
     
-    resizeStopSoundRef.current.currentTime = 0;
-    resizeStopSoundRef.current.play().catch(err => console.log('Resize stop sound play error:', err));
+    if (!hasPlayedResizeStopSoundRef.current) {
+      resizeStopSoundRef.current.currentTime = 0;
+      resizeStopSoundRef.current.play().catch(err => console.log('Resize stop sound play error:', err));
+      hasPlayedResizeStopSoundRef.current = true;
+    }
+    
+    // 다음 리사이즈를 위해 플래그 리셋
+    setTimeout(() => {
+      hasPlayedResizingSoundRef.current = false;
+      hasPlayedResizeStopSoundRef.current = false;
+    }, 100);
   };
 
   React.useEffect(() => {

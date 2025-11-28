@@ -217,7 +217,7 @@ const DinoGameApp = () => {
     ctx.fillRect(bird.x + 3, bird.y + 3, 3, 3);
   }, []);
 
-  // 배경 그리기
+  // 배경 그기 
   const drawBackground = useCallback((ctx) => {
     // 하늘
     ctx.fillStyle = '#f7f7f7';

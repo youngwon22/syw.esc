@@ -15,12 +15,13 @@ function FinderApp({ onOpenApp }) {
       { name: 'Music', type: 'folder', path: '/Music' }
     ],
     '/Applications': [
-      { name: 'TextEdit', type: 'app', icon: 'text.png', appType: 'Notepad' },
-      { name: 'Music', type: 'app', icon: '음악 앱.png', appType: 'Music' },
       { name: 'Album', type: 'app', icon: '앨범 앱.png', appType: 'Album' },
       { name: 'Chats', type: 'app', icon: '맥 chat.png', appType: 'Chats' },
+      { name: 'Dino Game', type: 'app', icon: '공룡게임.svg', appType: 'DinoGame' },
+      { name: 'Internet', type: 'app', icon: 'internet.png', appType: 'Internet' },
+      { name: 'Music', type: 'app', icon: '음악 앱.png', appType: 'Music' },
       { name: 'Photo Booth', type: 'app', icon: '포토부스.png', appType: 'PhotoBooth' },
-      { name: 'Dino Game', type: 'app', icon: '공룡게임.svg', appType: 'DinoGame' }
+      { name: 'TextEdit', type: 'app', icon: 'text.png', appType: 'Notepad' }
     ],
     '/Documents': [
       { name: 'My Documents', type: 'folder', path: '/Documents/My Documents' },
@@ -79,7 +80,14 @@ function FinderApp({ onOpenApp }) {
     }
   };
 
-  const currentFiles = directoryContents[currentDirectory] || [];
+  // 알파벳 순으로 정렬
+  const getSortedFiles = (files) => {
+    return [...files].sort((a, b) => {
+      return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    });
+  };
+
+  const currentFiles = getSortedFiles(directoryContents[currentDirectory] || []);
 
   return (
     <div className={styles.finder}>
@@ -109,9 +117,16 @@ function FinderApp({ onOpenApp }) {
           {currentFiles.map((file, index) => (
             <div 
               key={index} 
-              className={`${styles.fileItem} ${selectedItems.includes(file.name) ? styles.selected : ''}`}
-              onClick={(e) => handleItemClick(file, e)}
-              onDoubleClick={() => handleItemDoubleClick(file)}
+              className={styles.fileItem}
+              onClick={(e) => {
+                e.preventDefault();
+                handleItemClick(file, e);
+              }}
+              onDoubleClick={(e) => {
+                e.preventDefault();
+                handleItemDoubleClick(file);
+              }}
+              onMouseDown={(e) => e.preventDefault()}
             >
               <div className={styles.fileIcon}>
                 {file.type === 'folder' ? '📁' : 
