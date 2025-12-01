@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './InternetApp.module.css';
 
 // 사이트 데이터 정의
@@ -35,8 +35,10 @@ function InternetApp() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const carouselRef = useRef(null);
   const jpopSectionRef = useRef(null);
+  const carouselTrackRef = useRef(null);
 
   // 유튜브 영상 데이터
   const youtubeVideos = [
@@ -57,19 +59,55 @@ function InternetApp() {
   const nextVideo = () => {
     setCurrentVideoIndex((prev) => {
       const next = prev + 1;
-      return next >= youtubeVideos.length ? 0 : next;
+      if (next >= youtubeVideos.length) {
+        // 마지막에서 첫 번째로: 복제본을 통해 부드럽게 이동
+        setIsTransitioning(true);
+        // 먼저 복제본 위치로 이동 (transition 있음)
+        setTimeout(() => {
+          // transition이 끝난 후 실제 위치로 재설정 (transition 없음)
+          setCurrentVideoIndex(0);
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 50);
+        }, 300);
+        return youtubeVideos.length - 1; // 임시로 마지막 유지
+      }
+      return next;
     });
   };
 
   const prevVideo = () => {
     setCurrentVideoIndex((prev) => {
       const prevIndex = prev - 1;
-      return prevIndex < 0 ? youtubeVideos.length - 1 : prevIndex;
+      if (prevIndex < 0) {
+        // 첫 번째에서 마지막으로: 복제본을 통해 부드럽게 이동
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentVideoIndex(youtubeVideos.length - 1);
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 50);
+        }, 300);
+        return 0; // 임시로 첫 번째 유지
+      }
+      return prevIndex;
     });
   };
 
+
   // 드래그 시작 (Carousel 영역에서만)
   const handleDragStart = (e) => {
+    // iframe 위에서도 드래그 가능하도록 처리
+    const target = e.target;
+    if (target.tagName === 'IFRAME') {
+      e.preventDefault();
+      setIsDragging(true);
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      setStartX(clientX);
+      setCurrentX(clientX);
+      return;
+    }
+    
     // Carousel 영역에서만 드래그 시작
     if (!carouselRef.current || !carouselRef.current.contains(e.target)) return;
     
@@ -118,7 +156,17 @@ function InternetApp() {
   ];
   
   // 실제 표시할 인덱스 (1부터 시작, 0은 마지막 곡, 마지막은 첫 번째 곡)
-  const displayIndex = currentVideoIndex + 1;
+  // 무한 루프를 위해 복제본 사용
+  let displayIndex = currentVideoIndex + 1;
+  
+  // 마지막에서 첫 번째로 넘어갈 때: 첫 번째 복제본(youtubeVideos.length + 1) 사용
+  if (currentVideoIndex === youtubeVideos.length - 1 && isTransitioning) {
+    displayIndex = youtubeVideos.length + 1;
+  }
+  // 첫 번째에서 마지막으로 넘어갈 때: 마지막 복제본(0) 사용  
+  else if (currentVideoIndex === 0 && isTransitioning) {
+    displayIndex = 0;
+  }
 
   // HOME 버튼 클릭 - youngwon.com으로 새로고침
   const handleHomeClick = () => {
@@ -343,10 +391,11 @@ function InternetApp() {
                 style={{ touchAction: 'pan-x' }}
               >
                 <div 
+                  ref={carouselTrackRef}
                   className={styles.carouselTrack}
                   style={{
                     transform: `translateX(calc(${-displayIndex * 85}% - ${displayIndex * 20}px + 7.5%))`,
-                    transition: isDragging ? 'none' : 'transform 0.3s ease'
+                    transition: (isDragging || isTransitioning) ? 'none' : 'transform 0.3s ease'
                   }}
                 >
                   {carouselSlides.map((video, index) => {
@@ -367,6 +416,9 @@ function InternetApp() {
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                               className={styles.youtubeVideo}
+                              onMouseDown={handleDragStart}
+                              onTouchStart={handleDragStart}
+                              style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
                             ></iframe>
                           ) : (
                             <div className={styles.videoPlaceholder}>

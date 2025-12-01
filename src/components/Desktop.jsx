@@ -114,7 +114,7 @@ function Desktop() {
             y: 100
           };
         } else {
-          // 최적 크기로 확대 (화면의 80% 크기)
+          // 최적 크기로 확대
           console.log('Maximizing window');
           setMaximizedWindow(id);
           

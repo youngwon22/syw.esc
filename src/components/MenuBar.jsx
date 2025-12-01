@@ -17,6 +17,7 @@ function MenuBar() {
   const [showHelpDropdown, setShowHelpDropdown] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
   const [isAppOpening, setIsAppOpening] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   // 사운드 훅 사용
   const { playSound } = useSound(0.3);
@@ -220,23 +221,23 @@ function MenuBar() {
         {showYoungwonDropdown && (
           <div className={styles.dropdown}>
             <div className={styles.dropdownItem}>
-              <span style={{color: '#666', fontSize: '11px'}}>Name</span><br />
+              <span style={{color: '#666', fontSize: '11px', fontFamily: 'Geneva-12, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Name</span><br />
               <div style={{marginTop: '4px', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Youngwon Song</div>
             </div>
             <div className={styles.separator} />
             <div className={styles.dropdownItem}>
-              <span style={{color: '#666', fontSize: '11px'}}>Birth</span><br />
+              <span style={{color: '#666', fontSize: '11px', fontFamily: 'Geneva-12, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Birth</span><br />
               <div style={{marginTop: '4px', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>2001 / 03 / 11</div>
             </div>
             <div className={styles.separator} />
             <div className={styles.dropdownItem}>
-              <span style={{color: '#666', fontSize: '11px'}}>Major</span><br />
+              <span style={{color: '#666', fontSize: '11px', fontFamily: 'Geneva-12, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Major</span><br />
               <div style={{marginTop: '4px', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Software (2020~)</div>
             </div>
             <div className={styles.separator} />
             <div className={styles.dropdownItem}>
-              <span style={{color: '#666', fontSize: '11px'}}>Hobby</span><br />
-              <div style={{marginTop: '4px', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Music, Anime, Game</div>
+              <span style={{color: '#666', fontSize: '11px', fontFamily: 'Geneva-12, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Hobby</span><br />
+              <div style={{marginTop: '4px', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'}}>Music, Anime, walk</div>
             </div>
           </div>
         )}
@@ -261,7 +262,30 @@ function MenuBar() {
         <div className={styles.menuItem} onClick={handleViewClick}>View</div>
         {showViewDropdown && (
           <div className={styles.dropdown}>
-            <div className={styles.dropdownItem}>Empty</div>
+            <div 
+              className={styles.dropdownItem} 
+              onClick={() => setSelectedLanguage('English')}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <span>English</span>
+              {selectedLanguage === 'English' && <span style={{ fontSize: '12px' }}>✓</span>}
+            </div>
+            <div 
+              className={styles.dropdownItem} 
+              onClick={() => setSelectedLanguage('한글')}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <span>한글</span>
+              {selectedLanguage === '한글' && <span style={{ fontSize: '12px' }}>✓</span>}
+            </div>
+            <div 
+              className={styles.dropdownItem} 
+              onClick={() => setSelectedLanguage('日本語')}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <span>日本語</span>
+              {selectedLanguage === '日本語' && <span style={{ fontSize: '12px' }}>✓</span>}
+            </div>
           </div>
         )}
       </div>
