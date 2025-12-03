@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './TextEditApp.module.css';
+import fileSystem from '../core/FileSystem';
 
 function TextEditApp() {
   const [fontSize, setFontSize] = useState('Text');
@@ -7,11 +8,64 @@ function TextEditApp() {
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
+  const [currentFilePath, setCurrentFilePath] = useState(null);
+  const [isModified, setIsModified] = useState(false);
   const editorRef = useRef(null);
+
+  // 파일 열기 이벤트 리스너
+  useEffect(() => {
+    const handleOpenFile = (event) => {
+      const { path, content } = event.detail;
+      try {
+        // 파일 내용을 에디터에 로드
+        if (editorRef.current) {
+          editorRef.current.innerHTML = content || '<div style="font-size: 14px;"><br></div>';
+          setCurrentFilePath(path);
+          setIsModified(false);
+          
+          // 커서를 첫 번째 블록으로 이동
+          const firstBlock = editorRef.current.querySelector('div');
+          if (firstBlock) {
+            const range = document.createRange();
+            range.setStart(firstBlock, 0);
+            range.collapse(true);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to open file:', error);
+      }
+    };
+
+    window.addEventListener('openFile', handleOpenFile);
+    return () => {
+      window.removeEventListener('openFile', handleOpenFile);
+    };
+  }, []);
+
+  // 내용 변경 감지
+  useEffect(() => {
+    if (!editorRef.current) return;
+
+    const handleInput = () => {
+      if (currentFilePath) {
+        setIsModified(true);
+      }
+    };
+
+    const editor = editorRef.current;
+    editor.addEventListener('input', handleInput);
+    
+    return () => {
+      editor.removeEventListener('input', handleInput);
+    };
+  }, [currentFilePath]);
 
   // 초기 블록 생성
   useEffect(() => {
-    if (editorRef.current && editorRef.current.children.length === 0) {
+    if (editorRef.current && editorRef.current.children.length === 0 && !currentFilePath) {
       const initialBlock = document.createElement('div');
       initialBlock.style.fontSize = '14px';
       initialBlock.innerHTML = '<br>';
@@ -25,7 +79,39 @@ function TextEditApp() {
       selection.removeAllRanges();
       selection.addRange(range);
     }
-  }, []);
+  }, [currentFilePath]);
+
+  // 파일 저장 함수
+  const saveFile = () => {
+    if (!currentFilePath) {
+      // 새 파일인 경우 파일명 입력 받기
+      const fileName = prompt('파일명을 입력하세요:', 'untitled.txt');
+      if (!fileName) return;
+      
+      const newPath = `/Documents/${fileName}`;
+      try {
+        const content = editorRef.current ? editorRef.current.innerHTML : '';
+        fileSystem.write(newPath, content, { mimeType: 'text/plain' });
+        setCurrentFilePath(newPath);
+        setIsModified(false);
+        alert('파일이 저장되었습니다.');
+      } catch (error) {
+        console.error('Failed to save file:', error);
+        alert('파일 저장에 실패했습니다.');
+      }
+    } else {
+      // 기존 파일 저장
+      try {
+        const content = editorRef.current ? editorRef.current.innerHTML : '';
+        fileSystem.write(currentFilePath, content);
+        setIsModified(false);
+        alert('파일이 저장되었습니다.');
+      } catch (error) {
+        console.error('Failed to save file:', error);
+        alert('파일 저장에 실패했습니다.');
+      }
+    }
+  };
 
   // 텍스트 선택 시 버튼 상태 업데이트
   const updateButtonStates = () => {
@@ -277,6 +363,20 @@ function TextEditApp() {
   return (
     <div className={styles.notepad}>
       <div className={styles.toolbar}>
+        <button 
+          className={styles.toolButton}
+          onClick={saveFile}
+          title="Save"
+        >
+          💾 Save
+        </button>
+        
+        {currentFilePath && (
+          <span className={styles.fileName}>
+            {currentFilePath.split('/').pop()} {isModified && '*'}
+          </span>
+        )}
+        
         <button 
           className={`${styles.toolButton} ${isBold ? styles.active : ''}`}
           onClick={toggleBold}

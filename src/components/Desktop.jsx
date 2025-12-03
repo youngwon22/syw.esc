@@ -9,6 +9,7 @@ import ChatsApp from '../apps/ChatsApp';
 import PhotoBoothApp from '../apps/PhotoBoothApp';
 import DinoGameApp from '../apps/DinoGameApp';
 import InternetApp from '../apps/InternetApp';
+import TerminalApp from '../apps/TerminalApp';
 import { useSound } from '../hooks/useSound';
 import styles from './Desktop.module.css';
 
@@ -65,7 +66,7 @@ function Desktop() {
     const newWindow = {
       id: Date.now().toString(),
       appType,
-      title: appType === 'Notepad' ? 'TextEdit' : appType === 'Music' ? 'Music' : appType === 'Album' ? 'Album' : appType === 'Chats' ? 'Chats' : appType === 'PhotoBooth' ? 'Photo Booth' : appType === 'DinoGame' ? 'Dino Game' : appType === 'Internet' ? 'Internet' : 'Macintosh HD',
+      title: appType === 'Notepad' ? 'TextEdit' : appType === 'Music' ? 'Music' : appType === 'Album' ? 'Album' : appType === 'Chats' ? 'Chats' : appType === 'PhotoBooth' ? 'Photo Booth' : appType === 'DinoGame' ? 'Dino Game' : appType === 'Internet' ? 'Internet' : appType === 'Terminal' ? 'Terminal' : 'Macintosh HD',
       x: 100 + (windows.length * 30),
       y: 100 + (windows.length * 30),
       width: appType === 'Notepad' ? 500 : appType === 'Music' ? 400 : appType === 'Album' ? 800 : appType === 'Chats' ? 600 : appType === 'PhotoBooth' ? 600 : appType === 'DinoGame' ? 800 : appType === 'Internet' ? 900 : 600,
@@ -108,8 +109,8 @@ function Desktop() {
           setMaximizedWindow(null);
           return {
             ...window,
-            width: window.appType === 'Notepad' ? 500 : window.appType === 'Music' ? 400 : window.appType === 'PhotoBooth' ? 600 : window.appType === 'DinoGame' ? 800 : window.appType === 'Internet' ? 900 : 600,
-            height: window.appType === 'Notepad' ? 360 : window.appType === 'Music' ? 700 : window.appType === 'PhotoBooth' ? 500 : window.appType === 'DinoGame' ? 400 : window.appType === 'Internet' ? 700 : 400,
+            width: window.appType === 'Notepad' ? 500 : window.appType === 'Music' ? 400 : window.appType === 'PhotoBooth' ? 600 : window.appType === 'DinoGame' ? 800 : window.appType === 'Internet' ? 900 : window.appType === 'Terminal' ? 700 : 600,
+            height: window.appType === 'Notepad' ? 360 : window.appType === 'Music' ? 700 : window.appType === 'PhotoBooth' ? 500 : window.appType === 'DinoGame' ? 400 : window.appType === 'Internet' ? 700 : window.appType === 'Terminal' ? 500 : 400,
             x: 100,
             y: 100
           };
@@ -175,6 +176,8 @@ function Desktop() {
         return <DinoGameApp />;
       case 'Internet':
         return <InternetApp />;
+      case 'Terminal':
+        return <TerminalApp />;
       default:
         return <div>Unknown App</div>;
     }
@@ -223,6 +226,11 @@ function Desktop() {
           iconSrc="/icon/공룡게임.svg"
           appName="Dino Game"
           onDoubleClick={() => openApp('DinoGame')}
+        />
+        <AppIcon
+          iconSrc="/icon/terminal.png"
+          appName="Terminal"
+          onDoubleClick={() => openApp('Terminal')}
         />
       </div>
 

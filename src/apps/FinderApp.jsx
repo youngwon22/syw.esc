@@ -1,41 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './FinderApp.module.css';
+import fileSystem from '../core/FileSystem';
 
 function FinderApp({ onOpenApp }) {
   const [currentDirectory, setCurrentDirectory] = useState('/');
   const [history, setHistory] = useState(['/']);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [files, setFiles] = useState([]);
 
-  const directoryContents = {
-    '/': [
-      { name: 'Applications', type: 'folder', path: '/Applications' },
-      { name: 'Documents', type: 'folder', path: '/Documents' },
-      { name: 'Images', type: 'folder', path: '/Images' },
-      { name: 'Music', type: 'folder', path: '/Music' }
-    ],
-    '/Applications': [
-      { name: 'Album', type: 'app', icon: '앨범 앱.png', appType: 'Album' },
-      { name: 'Chats', type: 'app', icon: '맥 chat.png', appType: 'Chats' },
-      { name: 'Dino Game', type: 'app', icon: '공룡게임.svg', appType: 'DinoGame' },
-      { name: 'Internet', type: 'app', icon: 'internet.png', appType: 'Internet' },
-      { name: 'Music', type: 'app', icon: '음악 앱.png', appType: 'Music' },
-      { name: 'Photo Booth', type: 'app', icon: '포토부스.png', appType: 'PhotoBooth' },
-      { name: 'TextEdit', type: 'app', icon: 'text.png', appType: 'Notepad' }
-    ],
-    '/Documents': [
-      { name: 'My Documents', type: 'folder', path: '/Documents/My Documents' },
-      { name: 'Projects', type: 'folder', path: '/Documents/Projects' }
-    ],
-    '/Images': [
-      { name: 'Photos', type: 'folder', path: '/Images/Photos' },
-      { name: 'Screenshots', type: 'folder', path: '/Images/Screenshots' }
-    ],
-    '/Music': [
-      { name: 'Playlists', type: 'folder', path: '/Music/Playlists' },
-      { name: 'Downloads', type: 'folder', path: '/Music/Downloads' }
-    ]
-  };
+  // 현재 디렉토리의 파일 목록 가져오기
+  useEffect(() => {
+    try {
+      const fileList = fileSystem.list(currentDirectory);
+      setFiles(fileList);
+    } catch (error) {
+      console.error('Failed to list directory:', error);
+      setFiles([]);
+    }
+  }, [currentDirectory]);
 
   const navigateToDirectory = (path) => {
     if (path === currentDirectory) return;
@@ -71,12 +54,26 @@ function FinderApp({ onOpenApp }) {
   };
 
   const handleItemDoubleClick = (item) => {
-    if (item.type === 'folder') {
-      navigateToDirectory(item.path);
-      setSelectedItems([]); // 폴더 이동 시 선택 해제
-    } else if (item.type === 'app' && onOpenApp) {
-      onOpenApp(item.appType);
-      setSelectedItems([]); // 앱 실행 시 선택 해제
+    try {
+      const opened = fileSystem.open(item.path);
+      
+      if (opened.type === 'folder') {
+        navigateToDirectory(item.path);
+        setSelectedItems([]);
+      } else if (opened.type === 'app' && onOpenApp) {
+        onOpenApp(opened.appType);
+        setSelectedItems([]);
+      } else if (opened.type === 'file' && onOpenApp) {
+        // 파일을 적절한 앱으로 열기
+        onOpenApp(opened.appType);
+        // 파일 경로를 전역 상태나 이벤트로 전달할 수 있음
+        window.dispatchEvent(new CustomEvent('openFile', { 
+          detail: { path: opened.path, content: opened.content }
+        }));
+        setSelectedItems([]);
+      }
+    } catch (error) {
+      console.error('Failed to open item:', error);
     }
   };
 
@@ -87,7 +84,7 @@ function FinderApp({ onOpenApp }) {
     });
   };
 
-  const currentFiles = getSortedFiles(directoryContents[currentDirectory] || []);
+  const currentFiles = getSortedFiles(files);
 
   return (
     <div className={styles.finder}>
@@ -132,7 +129,7 @@ function FinderApp({ onOpenApp }) {
                 {file.type === 'folder' ? '📁' : 
                  file.type === 'app' ? (
                   <img 
-                    src={`/icon/${file.icon}`} 
+                    src={`/icon/${file.meta?.icon || '파일이미지.png'}`} 
                     alt={file.name}
                     className={styles.appIcon}
                   />

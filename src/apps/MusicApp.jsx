@@ -1,25 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './MusicApp.module.css';
+import fileSystem from '../core/FileSystem';
+
+// 기본 플레이리스트
+const defaultPlaylist = [
+  { id: 1, videoId: 'SIuF37EWaLU', title: '東京フラッシュ', artist: 'Vaundy' },
+  { id: 2, videoId: 's984zMNLL2o', title: 'シャッター', artist: '優里' },
+  { id: 3, videoId: 'm0HU1RSNQZU', title: '恋風邪にのせて', artist: 'Vaundy' },
+  { id: 4, videoId: 'LmZD-TU96q4', title: 'IRIS OUT', artist: '米津玄師' },
+  { id: 5, videoId: 'sPLqsLsooJY', title: 'JANE DOE', artist: '米津玄師, 宇多田ヒカル' },
+  { id: 6, videoId: 'oZpYEEcvu5I', title: '晩餐歌', artist: 'tuki' },
+  { id: 7, videoId: '1lYb9nLO_FY', title: 'フィナーレ', artist: 'eill' },
+  { id: 8, videoId: 'roqjNOlVaes', title: 'Shout Baby', artist: '緑黄色社会' },
+  { id: 9, videoId: 'DuMqFknYHBs', title: 'イエスタデイ', artist: 'Official髭男dism' },
+  { id: 10, videoId: 'WXS-o57VJ5w', title: 'GO!', artist: '코르티스' },
+  { id: 11, videoId: '42wfEs7oIP8', title: 'FaSHioN', artist: '코르티스' },
+  { id: 12, videoId: '5_n6t9G2TUQ', title: 'To. X', artist: '태연' },
+  { id: 13, videoId: 'bNKXxwOQYB8', title: 'EASY', artist: 'LE SSERAFIM' },
+  { id: 14, videoId: 'VjvzYjU1mY0', title: 'FAMOUS', artist: 'ALLDAY PROJECT' },
+  { id: 15, videoId: 'u8mH-WHQdb0', title: 'BIG BIRD', artist: 'O3ohn X Car, the garden' },
+  { id: 16, videoId: 'Km71Rr9K-Bw', title: 'Ditto', artist: 'NewJeans' }
+];
 
 function MusicApp() {
-  const [playlist, setPlaylist] = useState([
-    { id: 1, videoId: 'SIuF37EWaLU', title: '東京フラッシュ', artist: 'Vaundy' },
-    { id: 2, videoId: 's984zMNLL2o', title: 'シャッター', artist: '優里' },
-    { id: 3, videoId: 'm0HU1RSNQZU', title: '恋風邪にのせて', artist: 'Vaundy' },
-    { id: 4, videoId: 'LmZD-TU96q4', title: 'IRIS OUT', artist: '米津玄師' },
-    { id: 5, videoId: 'sPLqsLsooJY', title: 'JANE DOE', artist: '米津玄師, 宇多田ヒカル' },
-    { id: 6, videoId: 'oZpYEEcvu5I', title: '晩餐歌', artist: 'tuki' },
-    { id: 7, videoId: '1lYb9nLO_FY', title: 'フィナーレ', artist: 'eill' },
-    { id: 8, videoId: 'roqjNOlVaes', title: 'Shout Baby', artist: '緑黄色社会' },
-    { id: 9, videoId: 'DuMqFknYHBs', title: 'イエスタデイ', artist: 'Official髭男dism' },
-    { id: 10, videoId: 'WXS-o57VJ5w', title: 'GO!', artist: '코르티스' },
-    { id: 11, videoId: '42wfEs7oIP8', title: 'FaSHioN', artist: '코르티스' },
-    { id: 12, videoId: '5_n6t9G2TUQ', title: 'To. X', artist: '태연' },
-    { id: 13, videoId: 'bNKXxwOQYB8', title: 'EASY', artist: 'LE SSERAFIM' },
-    { id: 14, videoId: 'VjvzYjU1mY0', title: 'FAMOUS', artist: 'ALLDAY PROJECT' },
-    { id: 15, videoId: 'u8mH-WHQdb0', title: 'BIG BIRD', artist: 'O3ohn X Car, the garden' },
-    { id: 16, videoId: 'Km71Rr9K-Bw', title: 'Ditto', artist: 'NewJeans' }
-  ]);
+  const [playlist, setPlaylist] = useState(defaultPlaylist);
   
   const [currentSong, setCurrentSong] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -30,6 +34,36 @@ function MusicApp() {
   
   const playerRef = useRef(null);
   const progressIntervalRef = useRef(null);
+  const PLAYLIST_PATH = '/Music/default-playlist.json';
+
+  // 플레이리스트 로드
+  useEffect(() => {
+    try {
+      const file = fileSystem.read(PLAYLIST_PATH);
+      if (file.content) {
+        const loadedPlaylist = JSON.parse(file.content);
+        setPlaylist(loadedPlaylist);
+      }
+    } catch (error) {
+      // 파일이 없으면 기본 플레이리스트 사용하고 저장
+      try {
+        fileSystem.write(PLAYLIST_PATH, JSON.stringify(defaultPlaylist, null, 2), { mimeType: 'application/json' });
+      } catch (saveError) {
+        console.error('Failed to save default playlist:', saveError);
+      }
+    }
+  }, []);
+
+  // 플레이리스트 저장
+  const savePlaylist = () => {
+    try {
+      fileSystem.write(PLAYLIST_PATH, JSON.stringify(playlist, null, 2), { mimeType: 'application/json' });
+      alert('플레이리스트가 저장되었습니다.');
+    } catch (error) {
+      console.error('Failed to save playlist:', error);
+      alert('플레이리스트 저장에 실패했습니다.');
+    }
+  };
 
   // YouTube IFrame API 로드
   useEffect(() => {
@@ -246,6 +280,9 @@ function MusicApp() {
         </button>
         <button className={styles.controlBtn} onClick={playNext}>
           ⏭
+        </button>
+        <button className={styles.controlBtn} onClick={savePlaylist} title="Save Playlist">
+          💾
         </button>
       </div>
 

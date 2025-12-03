@@ -17,7 +17,7 @@ function MenuBar() {
   const [showHelpDropdown, setShowHelpDropdown] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
   const [isAppOpening, setIsAppOpening] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [selectedLanguage, setSelectedLanguage] = useState('한글');
 
   // 사운드 훅 사용
   const { playSound } = useSound(0.3);
@@ -210,6 +210,14 @@ function MenuBar() {
             <div className={`${styles.dropdownItem} ${styles.appDropdownItem}`} onClick={() => handleAppClick('DinoGame')}>
               <img src="/icon/공룡게임.svg" alt="Dino Game" className={styles.appIcon} />
               <span>Dino Game</span>
+            </div>
+            <div className={`${styles.dropdownItem} ${styles.appDropdownItem}`} onClick={() => handleAppClick('Internet')}>
+              <img src="/icon/internet.png" alt="Internet" className={styles.appIcon} />
+              <span>Internet</span>
+            </div>
+            <div className={`${styles.dropdownItem} ${styles.appDropdownItem}`} onClick={() => handleAppClick('Terminal')}>
+              <img src="/icon/terminal.png" alt="Terminal" className={styles.appIcon} />
+              <span>Terminal</span>
             </div>
           </div>
         )}
