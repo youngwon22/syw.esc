@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* 툴바 (주소창 + 바로가기) */
@@ -24,12 +24,17 @@
   );
   border-bottom: 1px solid #ccc;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  overflow: visible;
 }
 
 .addressRow {
   display: flex;
   align-items: center;
   gap: 12px;
+  overflow: visible;
 }
 
 .navigationButtons {
@@ -120,8 +125,12 @@
   background: rgba(0, 0, 0, 0.06);
 }
 
-.quickLink svg {
+.quickLink svg,
+.quickLink img {
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .quickLink span {
@@ -140,7 +149,7 @@
   flex-shrink: 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 150;
 }
 
 .gnbLeft {
@@ -183,7 +192,8 @@
 /* 메인 컨텐츠 영역 */
 .content {
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -193,12 +203,10 @@
 /* youngwon.com 전용 페이지 */
 .youngwonPage {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible;
   padding-top: 0;
 }
 
@@ -215,6 +223,7 @@
 /* 숲속 이미지 컨테이너 */
 .forestImageContainer {
   width: 100%;
+  height: calc(100vh - 180px);
   margin-top: 0;
   margin-bottom: 60px;
   flex-shrink: 0;
@@ -223,7 +232,7 @@
 
 .forestImage {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
   pointer-events: none;
@@ -446,3 +455,1757 @@
   transform: translateY(0);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
+
+/* 2010년 스타일 구글 페이지 */
+.google2010Page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* 상단 네비게이션 */
+.google2010TopNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #ffffff;
+}
+
+.google2010NavLinks {
+  display: flex;
+  gap: 4px;
+}
+
+.google2010NavLink {
+  color: #0000cc;
+  text-decoration: underline;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+.google2010NavLink:hover {
+  text-decoration: underline;
+}
+
+.google2010NavLink.active {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.google2010TopRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.google2010Separator {
+  color: #999;
+}
+
+/* 메인 영역 */
+.google2010Main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 120px;
+}
+
+/* 구글 로고 */
+.google2010Logo {
+  font-size: 90px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: -4px;
+}
+
+.google2010LogoG {
+  color: #4285f4;
+}
+
+.google2010LogoO1 {
+  color: #ea4335;
+}
+
+.google2010LogoO2 {
+  color: #fbbc05;
+}
+
+.google2010LogoG2 {
+  color: #4285f4;
+}
+
+.google2010LogoL {
+  color: #34a853;
+}
+
+.google2010LogoE {
+  color: #ea4335;
+}
+
+/* 검색 폼 */
+.google2010SearchForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.google2010SearchRow {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.google2010SearchInput {
+  width: 450px;
+  height: 26px;
+  padding: 4px 8px;
+  font-size: 16px;
+  border: 1px solid #cdcdcd;
+  border-top-color: #9a9a9a;
+  border-left-color: #9a9a9a;
+  outline: none;
+}
+
+.google2010SearchInput:focus {
+  border-color: #4d90fe;
+}
+
+.google2010SearchSide {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+  position: absolute;
+  left: calc(100% + 12px);
+}
+
+.google2010SideLink {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.google2010SideLink:hover {
+  text-decoration: underline;
+}
+
+.google2010SearchButtons {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.google2010SearchBtn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+  background: #f5f5f5;
+  border: 1px solid #dcdcdc;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.google2010SearchBtn:hover {
+  border-color: #b9b9b9;
+}
+
+.google2010SearchBtn:active {
+  border-color: #666;
+}
+
+/* 하단 푸터 */
+.google2010Footer {
+  padding: 15px;
+  background: #f2f2f2;
+  border-top: 1px solid #e4e4e4;
+  text-align: center;
+  font-size: 13px;
+}
+
+.google2010FooterLinks {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.google2010FooterLink {
+  color: #0000cc;
+  text-decoration: underline;
+}
+
+.google2010FooterLink:hover {
+  text-decoration: underline;
+}
+
+.google2010FooterSep {
+  color: #666;
+}
+
+.google2010Copyright {
+  color: #666;
+  font-size: 13px;
+}
+
+/* 2010년 스타일 구글 검색 결과 페이지 */
+.google2010ResultsPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  overflow-y: auto;
+}
+
+/* 검색 결과 헤더 */
+.google2010ResultsHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: #f1f1f1;
+  border-bottom: 1px solid #e5e5e5;
+  gap: 20px;
+}
+
+.google2010ResultsLogo {
+  font-size: 28px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: -2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.google2010ResultsSearchForm {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+  gap: 8px;
+}
+
+.google2010ResultsSearchInput {
+  flex: 1;
+  height: 26px;
+  padding: 4px 8px;
+  font-size: 16px;
+  border: 1px solid #cdcdcd;
+  border-top-color: #9a9a9a;
+  border-left-color: #9a9a9a;
+  outline: none;
+}
+
+.google2010ResultsSearchInput:focus {
+  border-color: #4d90fe;
+}
+
+.google2010ResultsSearchBtn {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+  background: #f5f5f5;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+}
+
+.google2010ResultsSearchBtn:hover {
+  border-color: #b9b9b9;
+}
+
+.google2010ResultsHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  margin-left: auto;
+}
+
+/* 검색 결과 탭 */
+.google2010ResultsTabs {
+  display: flex;
+  padding: 0 20px;
+  background: #f1f1f1;
+  border-bottom: 1px solid #e5e5e5;
+  gap: 0;
+}
+
+.google2010ResultsTab {
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #0000cc;
+  text-decoration: underline;
+  border-bottom: 2px solid transparent;
+}
+
+.google2010ResultsTab:hover {
+  text-decoration: underline;
+}
+
+.google2010ResultsTab.active {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #dd4b39;
+}
+
+/* 검색 결과 컨텐츠 영역 */
+.google2010ResultsContent {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 30px;
+}
+
+/* 좌측 사이드바 */
+.google2010ResultsSidebar {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.google2010ResultsStats {
+  color: #808080;
+  font-size: 11px;
+  margin-bottom: 15px;
+}
+
+.google2010ResultsFilters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.google2010FilterLink {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.google2010FilterLink:hover {
+  text-decoration: underline;
+}
+
+.google2010FilterLink.active {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.google2010ResultsDivider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 10px 0;
+}
+
+.google2010SearchTools {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.google2010SearchTools:hover {
+  text-decoration: underline;
+}
+
+/* 검색 결과 목록 */
+.google2010ResultsList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.google2010ResultItem {
+  max-width: 600px;
+}
+
+.google2010ResultTitle {
+  color: #1a0dab;
+  font-size: 16px;
+  text-decoration: underline;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.google2010ResultTitle:hover {
+  text-decoration: underline;
+}
+
+.google2010ResultUrl {
+  color: #006621;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.google2010ResultDescription {
+  color: #545454;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* 페이지네이션 */
+.google2010ResultsPagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  gap: 12px;
+}
+
+.google2010PaginationLogoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.google2010PaginationLogo {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: -1px;
+}
+
+.google2010PaginationArrow {
+  color: #4285f4;
+  font-size: 24px;
+}
+
+.google2010PaginationNumbers {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.google2010PaginationCurrent {
+  color: #dd4b39;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.google2010PaginationLink {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.google2010PaginationLink:hover {
+  text-decoration: underline;
+}
+
+.google2010PaginationNext {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.google2010PaginationNext:hover {
+  text-decoration: underline;
+}
+
+.google2010PaginationHelp {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.google2010HelpLink {
+  color: #0000cc;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.google2010HelpLink:hover {
+  text-decoration: underline;
+}
+
+/* 검색 결과 푸터 */
+.google2010ResultsFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px 30px;
+  background: #f2f2f2;
+  border-top: 1px solid #e5e5e5;
+  gap: 8px;
+}
+
+.google2010ResultsFooterLinks {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* 지브리파크 페이지 스타일 */
+.ghibliParkPage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+/* 히어로 섹션 (배경 이미지 영역) */
+.ghibliHeroSection {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.ghibliBackgroundImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 0;
+}
+
+/* 상단 네비게이션 바 */
+.ghibliNavBar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  gap: 8px;
+}
+
+/* 상단 메뉴 버튼 */
+.ghibliMenuButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #333;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ghibliMenuButton:hover {
+  opacity: 0.7;
+}
+
+/* 상단 지구본 버튼 */
+.ghibliGlobeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #333;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ghibliGlobeButton:hover {
+  opacity: 0.7;
+}
+
+/* 말풍선 버튼 */
+.ghibliBubble {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  border-radius: 50%;
+  padding: 18px 22px;
+  border: 3px solid #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.2;
+  min-width: 70px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ghibliBubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 먼지 캐릭터 (스스와타리) */
+.ghibliSootSprite {
+  position: absolute;
+  z-index: 9;
+  width: 60px;
+  height: 60px;
+  background-image: url('/internet/ghibli/soot-sprites.png');
+  background-size: 180px 180px;
+  background-repeat: no-repeat;
+}
+
+/* 첫 번째 먼지 (왼쪽 위) */
+.ghibliSootSprite1 {
+  background-position: -5px -5px;
+}
+
+/* 두 번째 먼지 (오른쪽) */
+.ghibliSootSprite2 {
+  background-position: -90px -45px;
+}
+
+/* 세 번째 먼지 (아래) */
+.ghibliSootSprite3 {
+  background-position: -30px -100px;
+}
+
+/* 하단 로고 컨테이너 */
+.ghibliLogoContainer {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+}
+
+.ghibliLogoJapanese {
+  width: 300px;
+  height: auto;
+}
+
+.ghibliLogoJapanese img {
+  width: 100%;
+  height: auto;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 16px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.5));
+}
+
+.ghibliLogoEnglish {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 8px;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 16px rgba(255, 255, 255, 0.9),
+    0 0 24px rgba(255, 255, 255, 0.7),
+    2px 2px 4px rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+}
+
+/* 맵 섹션 */
+.ghibliMapSection {
+  width: 100%;
+  padding: 60px 20px;
+  background: #f5f5f0;
+}
+
+.ghibliMapTitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.ghibliMapImage {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 푸터 섹션 */
+.ghibliFooter {
+  width: 100%;
+  padding: 50px 40px;
+  background: #f0f0eb;
+}
+
+.ghibliFooterContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.ghibliFooterColumn {
+  min-width: 180px;
+}
+
+.ghibliFooterColumn h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.ghibliFooterColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ghibliFooterColumn li {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ghibliFooterColumn li:hover {
+  color: #000;
+}
+
+.ghibliFooterColumn li.indented {
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+.ghibliFooterBottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #ddd;
+}
+
+.ghibliFooterPolicy {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.ghibliFooterCopyright {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* 넷플릭스 페이지 스타일 */
+.netflixPage {
+  width: 100%;
+  height: 100%;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 맨시티 페이지 스타일 */
+.mancityPage {
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 맨시티 네비게이션 바 */
+.mancityNavBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #6CABDD;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mancityNavLeft {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.mancityLogo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.mancityNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mancityNavItem {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.mancityNavItem:hover {
+  opacity: 0.8;
+}
+
+.mancityNavRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mancityLangButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.mancityLangButton:hover {
+  opacity: 0.8;
+}
+
+.mancitySearchButton {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.mancitySearchButton:hover {
+  opacity: 0.8;
+}
+
+.mancitySignInButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mancitySignInButton:hover {
+  background: #ffffff;
+  color: #6CABDD;
+}
+
+/* 맨시티 메인 콘텐츠 */
+.mancityContent {
+  flex: 1;
+  padding: 0 24px;
+}
+
+/* 맨시티 히어로 섹션 */
+.mancityHero {
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 24px 24px 0;
+}
+
+.mancityHeroContent {
+  background: #1C2C5B;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+  min-width: 280px;
+}
+
+.mancityHeroLabel {
+  color: #6CABDD;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.mancityHeroTitle {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.mancityHeroImage {
+  flex: 1;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.mancityHeroImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 맨시티 뉴스 섹션 */
+.mancityNewsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 32px 24px 0;
+}
+
+.mancityNewsCard {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mancityNewsCard:hover {
+  transform: translateY(-4px);
+}
+
+.mancityNewsImage {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.mancityNewsImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.mancityNewsCard:hover .mancityNewsImage img {
+  transform: scale(1.05);
+}
+
+.mancityNewsTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+}
+
+.mancityNewsLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6CABDD;
+  letter-spacing: 0.5px;
+}
+
+/* 맨시티 비디오 섹션 */
+.mancityVideoSection {
+  display: flex;
+  overflow: hidden;
+  margin: 48px -24px 0;
+  width: calc(100% + 48px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  scroll-margin-top: 72px;
+}
+
+.mancityVideoContent {
+  background: #2A9D8F;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 35%;
+  min-width: 260px;
+  position: relative;
+}
+
+.mancityVideoLabel {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.mancityVideoTitle {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.mancityPlayButton {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  width: 50px;
+  height: 50px;
+  background: #6CABDD;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mancityPlayButton:hover {
+  transform: scale(1.1);
+  background: #5a9bcd;
+}
+
+.mancityVideoPlayer {
+  flex: 1;
+  min-height: 350px;
+  background: #1a1a1a;
+}
+
+.mancityVideoPlayer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 맨시티 푸터 */
+.mancityFooter {
+  background: #1C2C5B;
+  padding: 48px 24px 32px;
+  margin-top: 48px;
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+}
+
+.mancityFooterTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+}
+
+.mancityFooterLogo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.mancityFooterSocial {
+  display: flex;
+  gap: 12px;
+}
+
+.mancitySocialButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #6CABDD;
+  background: transparent;
+  color: #6CABDD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mancitySocialButton:hover {
+  background: #6CABDD;
+  color: #1C2C5B;
+}
+
+.mancityFooterLinks {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  flex-wrap: wrap;
+}
+
+.mancityFooterLinks span {
+  color: #6CABDD;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mancityFooterLinks span:hover {
+  color: #ffffff;
+}
+
+.mancityFooterSecondary {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  flex-wrap: wrap;
+}
+
+.mancityFooterSecondary span {
+  color: #6CABDD;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mancityFooterSecondary span:hover {
+  color: #ffffff;
+}
+
+.mancityFooterBottom {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(108, 171, 221, 0.2);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mancityCopyright {
+  color: rgba(108, 171, 221, 0.7);
+  font-size: 12px;
+}
+
+/* 맨시티 Shop 섹션 */
+.mancityShopSection {
+  margin: 48px -24px 0;
+  width: calc(100% + 48px);
+  background: #000000;
+  scroll-margin-top: 72px;
+}
+
+.mancityShopBanner {
+  background: #d4ff00;
+  text-align: center;
+  padding: 12px 20px;
+}
+
+.mancityShopBanner span {
+  color: #1C2C5B;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.mancityShopHero {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mancityShopHero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.mancityShopInfo {
+  background: #ffffff;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.mancityShopTitle {
+  font-size: 36px;
+  font-weight: 900;
+  color: #1C2C5B;
+  line-height: 1.1;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.mancityShopDescription {
+  font-size: 16px;
+  color: #333;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+.mancityShopButton {
+  background: #d4ff00;
+  color: #1C2C5B;
+  border: none;
+  padding: 16px 80px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mancityShopButton:hover {
+  background: #c0eb00;
+  transform: translateY(-2px);
+}
+
+/* 애플 페이지 스타일 */
+.applePage {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* 애플 네비게이션 바 */
+.appleNavBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: #000000;
+  height: 44px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.appleNavLeft {
+  display: flex;
+  align-items: center;
+}
+
+.appleNavLogo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+}
+
+.appleNavCenter {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.appleNavItem {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.appleNavItem:hover {
+  color: #ffffff;
+}
+
+.appleNavRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.appleNavIcon {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.appleNavIcon:hover {
+  color: #ffffff;
+}
+
+/* 애플 히어로 섹션 */
+.appleHeroSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 80px;
+  background: #ffffff;
+}
+
+.appleArrowLeft,
+.appleArrowRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 48px;
+  color: #d2d2d7;
+  cursor: pointer;
+  padding: 20px;
+  transition: color 0.2s ease;
+  z-index: 10;
+}
+
+.appleArrowLeft {
+  left: 20px;
+}
+
+.appleArrowRight {
+  right: 20px;
+}
+
+.appleArrowLeft:hover,
+.appleArrowRight:hover {
+  color: #86868b;
+}
+
+.appleHeroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.appleProductLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.appleWatchLogo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.appleProductName {
+  font-size: 40px;
+  font-weight: 500;
+  color: #1d1d1f;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.appleTagline {
+  font-size: 24px;
+  font-weight: 400;
+  color: #1d1d1f;
+  margin: 0 0 40px 0;
+}
+
+.appleProductImage {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  background: #f5f5f7;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86868b;
+  font-size: 14px;
+}
+
+.appleProductImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.appleIndicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.appleIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d2d2d7;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.appleIndicator:hover {
+  background: #86868b;
+}
+
+.appleIndicator.active {
+  background: transparent;
+  border: 2px solid #0071e3;
+  box-sizing: border-box;
+}
+
+/* ===== Time Machine 스타일 ===== */
+
+/* Time Machine 래퍼 */
+.timeMachineWrapper {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+/* 연도 선택 버튼 */
+.yearSelectButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  background: linear-gradient(180deg,
+    #f5f5f5 0%,
+    #ececec 50%,
+    #e0e0e0 100%
+  );
+  border: 1px solid #b8b8b8;
+  border-top-color: #c8c8c8;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 70px;
+}
+
+.yearSelectButton:hover {
+  background: linear-gradient(180deg,
+    #e3f2ff 0%,
+    #cfe7ff 50%,
+    #b8dcff 100%
+  );
+  border-color: #7eb4ea;
+}
+
+.yearSelectButton svg {
+  flex-shrink: 0;
+  color: #666;
+}
+
+/* 연도 드롭다운 메뉴 - macOS 스타일 */
+.yearDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  /* 밝은 브러시드 메탈 배경 */
+  background: linear-gradient(180deg,
+    #f8f8f8 0%,
+    #e8e8e8 100%
+  );
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.9) 0px,
+      rgba(255, 255, 255, 0.9) 1px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.04) 2px,
+      rgba(0, 0, 0, 0.04) 3px,
+      transparent 3px,
+      transparent 4px
+    ),
+    linear-gradient(180deg,
+      #f8f8f8 0%,
+      #e8e8e8 100%
+    );
+  border: 1px solid #a0a0a0;
+  border-radius: 0;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  z-index: 10000;
+  min-width: 120px;
+  overflow: visible;
+}
+
+.yearDropdownScrollArea {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+/* 스크롤바 스타일 */
+.yearDropdownScrollArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.yearDropdownScrollArea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.yearDropdownScrollArea::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.yearDropdownScrollArea::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+  background-clip: content-box;
+}
+
+.yearDropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 24px 6px 12px;
+  font-size: 13px;
+  color: #1d1d1f;
+  cursor: default;
+  transition: none;
+  margin: 0 4px;
+  border-radius: 0;
+  border-right: 1px solid #d0d0d0;
+}
+
+.yearDropdownItem:hover {
+  background: #0061d5;
+  color: #ffffff;
+}
+
+.yearDropdownItem.selected {
+  font-weight: 500;
+}
+
+.yearDropdownItem.selected:hover {
+  background: #0061d5;
+  color: #ffffff;
+}
+
+.checkmark {
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.yearDropdownItem:hover .checkmark {
+  color: #ffffff;
+}
+
+/* 기존 select 스타일 (사용 안 함) */
+.yearSelect {
+  padding: 4px 24px 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  /* Brushed metal gradient background */
+  background: linear-gradient(180deg,
+    #f5f5f5 0%,
+    #ececec 50%,
+    #e0e0e0 100%
+  );
+  /* Add subtle texture for brushed metal effect */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.4) 2px,
+      rgba(255, 255, 255, 0.4) 4px
+    ),
+    linear-gradient(180deg,
+      #f5f5f5 0%,
+      #ececec 50%,
+      #e0e0e0 100%
+    );
+  border: 1px solid #b8b8b8;
+  border-top-color: #c8c8c8;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  /* Dropdown arrow */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.4) 2px,
+      rgba(255, 255, 255, 0.4) 4px
+    ),
+    linear-gradient(180deg,
+      #f5f5f5 0%,
+      #ececec 50%,
+      #e0e0e0 100%
+    );
+  background-repeat: no-repeat, repeat, repeat;
+  background-position: right 8px center, 0 0, 0 0;
+  transition: all 0.2s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 80px;
+  width: auto;
+}
+
+.yearSelect:hover {
+  background: linear-gradient(180deg,
+    #e3f2ff 0%,
+    #cfe7ff 50%,
+    #b8dcff 100%
+  );
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.5) 2px,
+      rgba(255, 255, 255, 0.5) 4px
+    ),
+    linear-gradient(180deg,
+      #e3f2ff 0%,
+      #cfe7ff 50%,
+      #b8dcff 100%
+    );
+  background-repeat: no-repeat, repeat, repeat;
+  background-position: right 8px center, 0 0, 0 0;
+  border-color: #7eb4ea;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 1px 3px rgba(0, 113, 227, 0.3);
+}
+
+.yearSelect:focus {
+  border-color: #4a90d9;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 0 0 3px rgba(74, 144, 217, 0.3);
+}
+
+/* Apple Time Machine 페이지 */
+.appleTimeMachinePage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f7;
+}
+
+/* Wayback Machine 컨테이너 */
+.waybackContainer {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wayback Machine iframe */
+.waybackIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #ffffff;
+  transition: opacity 0.3s ease;
+}
+
+/* 로딩 인디케이터 */
+.waybackLoading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+  z-index: 10;
+}
+
+.waybackLoading span {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 로딩 스피너 */
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #0071e3;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

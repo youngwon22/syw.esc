@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import styles from './WindowFrame.module.css';
 
-function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, x, y, width, height, zIndex, isMaximized }) {
+function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, x, y, width, height, zIndex, isMaximized, isFocused, isDimmed }) {
   const [isResizing, setIsResizing] = useState(false);
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
   const windowRef = useRef(null);
@@ -184,19 +184,21 @@ function WindowFrame({ title, children, onClose, onFocus, onMaximize, onResize, 
     <Draggable
       position={{ x, y }}
       handle=".titleBar"
+      bounds={{ top: 0, left: -width + 100, right: window.innerWidth - 100, bottom: window.innerHeight - 50 }}
       onStart={handleStart}
       onDrag={handleDrag}
       onStop={handleStop}
       disabled={isMaximized}
     >
-      <div 
+      <div
         ref={windowRef}
-        className={styles.windowFrame}
-        style={{ 
-          width: `${width}px`, 
+        className={`${styles.windowFrame} ${isFocused ? styles.windowFrameFocused : ''} ${isDimmed ? styles.windowFrameDimmed : ''}`}
+        style={{
+          width: `${width}px`,
           height: `${height}px`,
           zIndex: zIndex
         }}
+        onMouseDownCapture={onFocus}
       >
         <div className={`${styles.titleBar} titleBar`}>
           <div className={styles.trafficLights}>

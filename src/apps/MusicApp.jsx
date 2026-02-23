@@ -281,9 +281,6 @@ function MusicApp() {
         <button className={styles.controlBtn} onClick={playNext}>
           ⏭
         </button>
-        <button className={styles.controlBtn} onClick={savePlaylist} title="Save Playlist">
-          💾
-        </button>
       </div>
 
       {/* 볼륨 컨트롤 */}

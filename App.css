@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 body {
@@ -14,6 +16,12 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* 입력 필드에서는 텍스트 선택 가능하게 */
+input, textarea, [contenteditable="true"] {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 

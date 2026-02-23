@@ -439,6 +439,13 @@ class FileSystem {
       this.root.addChild(music);
     }
 
+    // Trash 폴더 확인 및 생성
+    if (!this.getNode('/Trash')) {
+      const trash = new FileSystemNode('Trash', 'folder', '/Trash', this.root);
+      trash.meta.icon = 'trash.png';
+      this.root.addChild(trash);
+    }
+
     this.saveToStorage();
   }
 

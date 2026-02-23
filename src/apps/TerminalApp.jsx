@@ -20,7 +20,7 @@ function TerminalApp() {
     }
   }, [output]);
 
-  // 포커스 관리
+  // 포커스 관리ㅇ0
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styles from './FinderApp.module.css';
 import fileSystem from '../core/FileSystem';
 
-function FinderApp({ onOpenApp }) {
-  const [currentDirectory, setCurrentDirectory] = useState('/');
-  const [history, setHistory] = useState(['/']);
+function FinderApp({ onOpenApp, initialPath }) {
+  const startPath = initialPath || '/';
+  const [currentDirectory, setCurrentDirectory] = useState(startPath);
+  const [history, setHistory] = useState([startPath]);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
   const [files, setFiles] = useState([]);
+  const [pathInput, setPathInput] = useState(startPath);
 
   // 현재 디렉토리의 파일 목록 가져오기
   useEffect(() => {
@@ -22,12 +24,13 @@ function FinderApp({ onOpenApp }) {
 
   const navigateToDirectory = (path) => {
     if (path === currentDirectory) return;
-    
+
     const newHistory = history.slice(0, historyIndex + 1);
     newHistory.push(path);
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
     setCurrentDirectory(path);
+    setPathInput(path);
   };
 
   const goBack = () => {
@@ -35,6 +38,7 @@ function FinderApp({ onOpenApp }) {
       const newIndex = historyIndex - 1;
       setHistoryIndex(newIndex);
       setCurrentDirectory(history[newIndex]);
+      setPathInput(history[newIndex]);
     }
   };
 
@@ -43,6 +47,25 @@ function FinderApp({ onOpenApp }) {
       const newIndex = historyIndex + 1;
       setHistoryIndex(newIndex);
       setCurrentDirectory(history[newIndex]);
+      setPathInput(history[newIndex]);
+    }
+  };
+
+  const handlePathSubmit = (e) => {
+    e.preventDefault();
+    const path = pathInput.trim() || '/';
+
+    // 경로가 존재하는지 확인
+    try {
+      const node = fileSystem.getNode(path);
+      if (node && node.type === 'folder') {
+        navigateToDirectory(path);
+      } else {
+        // 잘못된 경로면 현재 경로로 되돌림
+        setPathInput(currentDirectory);
+      }
+    } catch {
+      setPathInput(currentDirectory);
     }
   };
 
@@ -107,7 +130,15 @@ function FinderApp({ onOpenApp }) {
             →
           </button>
         </div>
-        <div className={styles.pathBar}>{currentDirectory}</div>
+        <form onSubmit={handlePathSubmit} className={styles.pathForm}>
+          <input
+            type="text"
+            className={styles.pathBar}
+            value={pathInput}
+            onChange={(e) => setPathInput(e.target.value)}
+            onBlur={() => setPathInput(currentDirectory)}
+          />
+        </form>
       </div>
       <div className={styles.content}>
         <div className={styles.fileList}>

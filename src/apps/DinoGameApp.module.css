@@ -55,14 +55,7 @@
   background-color: white;
   padding: 40px;
   border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  border: 3px solid #333;
-}
-
-.startScreen h2,
-.gameOverScreen h2 {
-  margin: 0 0 20px 0;
+  text-align: ce10 20px 0;
   font-size: 28px;
   color: #333;
   font-family: 'Courier New', monospace;
